@@ -1,25 +1,11 @@
 class Solution {
 public:
-    // divide the num with 2,3,5 until possible
     bool isUgly(int n) {
-        if(n==0) return false;
-        int flag=1;
-        while(flag){
-            flag=0;
-            while(n%2==0){
-                n/=2;
-                flag=1;
-            }
-            while(n%3==0){
-                n/=3;
-                flag=1;
-            }
-            while(n%5==0){
-                n/=5;
-                flag=1;
-            }
-        }
-        if(n==1) return true;
-        return false;
+        if(n<1) return false;
+        else if(n==1) return true;
+        else if(n%2==0) return isUgly(n/2);
+        else if(n%3==0) return isUgly(n/3);
+        else if(n%5==0) return isUgly(n/5);
+        else return false;
     }
 };
