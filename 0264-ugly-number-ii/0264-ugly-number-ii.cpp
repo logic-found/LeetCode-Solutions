@@ -1,22 +1,23 @@
 class Solution {
 public:
+    //priority queue
     int nthUglyNumber(int n) {
         if(n<=6) return n;
-        vector<int> dp(n);
-        dp[0]=1;
-        int p1=0,p2=0,p3=0;
+        priority_queue<long long int,vector<long long int>,greater<long long int>> q;
+        q.push(1);
         
         for(int i=1;i<n;++i){
-            int two=2*dp[p1];
-            int three=3*dp[p2];
-            int five=5*dp[p3];
+            long long temp=q.top();
+            q.pop();
             
-            dp[i]=min(two,min(three,five));
-            if(dp[i]==two) p1++;
-            if(dp[i]==three) p2++;
-            if(dp[i]==five) p3++;
+            while(!q.empty() && q.top()==temp)
+                q.pop();
+            
+            q.push(2*temp);
+            q.push(3*temp);
+            q.push(5*temp);
+            
         }
-        //for(auto i:dp) cout<<i<<" ";
-        return dp[n-1];
+        return q.top();
     }
 };
