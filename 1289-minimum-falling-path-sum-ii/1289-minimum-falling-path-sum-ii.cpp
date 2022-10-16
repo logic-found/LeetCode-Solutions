@@ -19,10 +19,10 @@ public:
                 dp[i+1][prev]=temp;
             }
         }
-        for(auto i:dp){
-            for(auto j:i) cout<<j<<" ";
-            cout<<endl;
-        }
+        // for(auto i:dp){
+        //     for(auto j:i) cout<<j<<" ";
+        //     cout<<endl;
+        // }
         return dp[-1+1][n];
     }
 };
