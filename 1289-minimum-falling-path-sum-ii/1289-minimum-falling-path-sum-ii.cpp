@@ -1,23 +1,22 @@
 class Solution {
 public:
-    
-    int recur(int i,int prev,int& m,int& n,vector<vector<int>>& mat,vector<vector<int>>& dp){
-        if(i>=m) return 0;
-        if(dp[i][prev+1]!=-1) return dp[i][prev+1];
-        
-        int temp=INT_MAX;
-        for(int j=0;j<n;++j){
-            if(j==prev) continue;
-            temp=min(temp,mat[i][j]+recur(i+1,j,m,n,mat,dp));
-        }
-        return dp[i][prev+1]=temp;
-    }
     int minFallingPathSum(vector<vector<int>>& mat) {
         int m=mat.size(),n=m;
-        vector<vector<int>> dp(m,vector<int>(n+1,-1));
+        vector<vector<int>> dp(m+1,vector<int>(n+1));
         
-        int ans=recur(0,-1,m,n,mat,dp);
-       
-        return ans;
+        for(int j=0;j<=n;++j) dp[m][j]=0;   //initialization
+        
+        for(int i=m-1;i>=0;--i){
+            for(int prev=0;prev<=n;++prev){  
+                int temp=INT_MAX;
+                
+                for(int j=0;j<n;++j){
+                    if(prev==j) continue;
+                    temp=min(temp,mat[i][j]+dp[i+1][j]);
+                }
+                dp[i][prev]=temp;
+            }
+        }
+        return dp[0][n];    // storing th min of each row at nth column
     }
 };
