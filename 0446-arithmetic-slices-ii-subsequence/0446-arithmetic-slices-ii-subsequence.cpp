@@ -7,10 +7,9 @@ public:
         
         for(int i=1;i<n;++i){
             for(int j=0;j<i;++j){
-                long long int diff=(long)nums[i]-nums[j];
-                long long int x=mp[j][diff];
+                long long int x=mp[j][(long)nums[i]-nums[j]];
                 ans+=x;
-                mp[i][diff]+=(x+1);
+                mp[i][(long)nums[i]-nums[j]]+=(x+1);
             }
         }
         return ans;
