@@ -1,14 +1,17 @@
 class Solution {
 public:
+    // space optimised
     int minimumTotal(vector<vector<int>>& tri) {
       int m=tri.size();  
-      vector<vector<int>> dp(m+1,vector<int>(m+1,0));
+      vector<int> dp(m+1);
         
       for(int i=m-1;i>=0;--i){
+          vector<int> temp(i+1);
           for(int j=0;j<=i;++j){
-            dp[i][j]=tri[i][j]+min(dp[i+1][j],dp[i+1][j+1]);
+            temp[j]=tri[i][j]+min(dp[j],dp[j+1]);
           }
+          dp=temp;
       }
-        return dp[0][0]; 
+        return dp[0]; 
     }
 };
