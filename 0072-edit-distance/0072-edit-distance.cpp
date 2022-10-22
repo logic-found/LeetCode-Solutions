@@ -1,10 +1,9 @@
 class Solution {
 public:
     int recur(int i,int j,string& s1,string& s2,vector<vector<int>>& dp){
-        if(j<0 && i>=0) return i+1;
-        if(i<0 && j>=0) return j+1;
+        if(j<0 && i>=0) return i+1;    // delete all left over
+        if(i<0 && j>=0) return j+1;    // insert all left over
         if(j<0 || i<0) return 0;
-        //cout<<s1[i]<<" "<<s2[j]<<endl;
         if(dp[i][j]!=-1) return dp[i][j];
         
         if(s1[i]==s2[j]){
