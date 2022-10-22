@@ -1,26 +1,24 @@
 class Solution {
 public:
-    // 1 based index
-    int recur(int i,int j,string& s1,string& s2,vector<vector<int>>& dp){
-
-        if(j==0) return i;    // delete all left over
-        if(i==0) return j;    // insert all left over
-        if(dp[i][j]!=-1) return dp[i][j];
-        
-        if(s1[i-1]==s2[j-1]){
-            return dp[i][j]=recur(i-1,j-1,s1,s2,dp);
-        }
-        else{
-            int temp=1+recur(i-1,j-1,s1,s2,dp);       // replace
-            temp=min(temp,1+recur(i-1,j,s1,s2,dp));    //delete
-            temp=min(temp,1+recur(i,j-1,s1,s2,dp));    //insert
-            return dp[i][j]=temp;
-        }
-
-    }
+    //1 based index
     int minDistance(string s1, string s2) {
         int n1=s1.size(),n2=s2.size();
-        vector<vector<int>> dp(n1+1,vector<int>(n2+1,-1));
-       return recur(n1,n2,s1,s2,dp);
+        vector<vector<int>> dp(n1+1,vector<int>(n2+1));
+        
+        for(int i=0;i<=n1;++i){   // base case-> j<0 =i   
+            dp[i][0]=i;
+        }
+        for(int j=0;j<=n2;++j){   // i<0 =j
+            dp[0][j]=j;
+        }
+        for(int i=1;i<=n1;++i){
+            for(int j=1;j<=n2;++j){
+                if(s1[i-1]==s2[j-1]) dp[i][j]=dp[i-1][j-1];
+                else{
+                    dp[i][j]=1+min(dp[i-1][j-1],min(dp[i][j-1],dp[i-1][j]));
+                }
+            }
+        }
+        return dp[n1][n2];
     }
 };
