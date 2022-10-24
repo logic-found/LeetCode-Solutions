@@ -17,7 +17,6 @@ public:
     int combinationSum4(vector<int>& nums, int target) {
         int n=nums.size();
         vector<vector<int>> dp(n,vector<int>(target+1,-1));
-        sort(nums.begin(),nums.end());
         return recur(0,n,target,nums,dp);
     }
 };
