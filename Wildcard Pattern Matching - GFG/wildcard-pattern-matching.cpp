@@ -8,7 +8,8 @@ class Solution{
     bool recur(int idx1,int idx2,string& s1,string& s2,vector<vector<int>>& dp){
     	if(idx1==0 && idx2==0) return true;
     	else if(idx2==0) return false;
-    	else if(s2[idx2-1]!='?' && s2[idx2-1]!='*' && s1[idx1-1]!=s2[idx2-1]) return false;
+    	else if(s2[idx2-1]!='?' && s2[idx2-1]!='*' && (idx1>0 && s1[idx1-1]!=s2[idx2-1]))
+    	    return false;
     	else if(dp[idx1][idx2]!=-1) return dp[idx1][idx2];
     	
     	if(idx1>0 && s1[idx1-1]==s2[idx2-1]){
