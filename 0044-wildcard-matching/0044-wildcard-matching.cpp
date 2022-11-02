@@ -1,29 +1,36 @@
 class Solution {
 public:
     // 1 based indexing
-     bool recur(int idx1,int idx2,string& s1,string& s2,vector<vector<int>>& dp){
-    	if(idx1==0 && idx2==0) return true;
-    	else if(idx2==0) return false;
-    	else if(s2[idx2-1]!='?' && s2[idx2-1]!='*' && (idx1>0 && s1[idx1-1]!=s2[idx2-1])) return                                                                 false;
-    	else if(dp[idx1][idx2]!=-1) return dp[idx1][idx2];
-    	
-    	if(idx1>0 && s1[idx1-1]==s2[idx2-1]){
-    		return dp[idx1][idx2]=recur(idx1-1,idx2-1,s1,s2,dp);
-    	}
-    	else if(idx1>0 && s2[idx2-1]=='?'){
-    		return dp[idx1][idx2]=recur(idx1-1,idx2-1,s1,s2,dp);
-    	}
-    	else if(s2[idx2-1]=='*'){
-    		for(int i=0;idx1-i>=0;++i){
-    			bool a=recur(idx1-i,idx2-1,s1,s2,dp);
-    			if(a) return dp[idx1][idx2]=true;
-    		}
-    	}
-    	return dp[idx1][idx2]=false;
-    }
-    bool isMatch(string s, string p) {
-        int n1=s.size(),n2=p.size();
-        vector<vector<int>> dp(n1+1,vector<int>(n2+1,-1));
-        return recur(n1,n2,s,p,dp);
+    // tabulation
+    bool isMatch(string s1, string s2) {
+        int n1=s1.size(),n2=s2.size();
+        vector<vector<int>> dp(n1+1,vector<int>(n2+1));
+         
+        for(int i=1;i<=n2 && s2[i-1]=='*';++i){
+            dp[0][i]=1;
+        }
+        dp[0][0]=1;
+        for(int idx1=1;idx1<=n1;++idx1){
+            for(int idx2=1;idx2<=n2;++idx2){
+                if(s1[idx1-1]==s2[idx2-1]){
+                    dp[idx1][idx2]=dp[idx1-1][idx2-1];
+                }
+                else if(s2[idx2-1]=='?'){
+                    dp[idx1][idx2]=dp[idx1-1][idx2-1];
+                }
+                else if(s2[idx2-1]=='*'){
+                    for(int i=0;idx1-i>=0;++i){
+                        bool a=dp[idx1-i][idx2-1];
+                        if(a){
+                            dp[idx1][idx2]=1;
+                            break;
+                        }
+                    }
+                }
+                else dp[idx1][idx2]=0;
+            }
+        }
+        
+        return dp[n1][n2];
     }
 };
