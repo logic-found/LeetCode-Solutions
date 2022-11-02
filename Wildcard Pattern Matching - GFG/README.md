@@ -12,23 +12,23 @@ The wildcard pattern can include the characters ‘?’ and ‘*’<br style="us
 
 <p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Example 1:</strong></span></p>
 
-<pre style="position: relative; user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input:</strong>
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input:</strong>
 pattern = "ba*a?"
 str = "baaabab"
 <strong style="user-select: auto;">Output:</strong> 1
 <strong style="user-select: auto;">Explanation: </strong>replace '*' with "aab" and 
 '?' with 'b'. 
-</span><div class="open_grepper_editor" title="Edit &amp; Save To Grepper" style="user-select: auto;"></div></pre>
+</span></pre>
 
 <p style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Example 2:</strong></span></p>
 
-<pre style="position: relative; user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input</strong>:
+<pre style="user-select: auto;"><span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Input</strong>:
 pattern = "a*ab"
 str = "baaabab"
 <strong style="user-select: auto;">Output:</strong> 0
 <strong style="user-select: auto;">Explanation</strong>: Because of'a' at first position,
 pattern and str can't be matched. 
-</span><div class="open_grepper_editor" title="Edit &amp; Save To Grepper" style="user-select: auto;"></div></pre>
+</span></pre>
 
 <p style="user-select: auto;"><br style="user-select: auto;">
 <span style="font-size: 18px; user-select: auto;"><strong style="user-select: auto;">Your Task:</strong><br style="user-select: auto;">
